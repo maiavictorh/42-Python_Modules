@@ -1,21 +1,24 @@
 class Plant:
-    def __init__(self, name: str) -> None:
-        self._name = name
-        self.__height = 0
-        self.__age = 0
+    def __init__(self, name: str, height: int, age: int) -> None:
+        self.name = name
+        self.height = height
+        self.age = age
 
     def get_info(self) -> str:
-        return f"{self._name} ({self.__height}cm, {self.__age} days)"
-
-    def set_height(self, height: int) -> None:
-        if (height < 0):
-            print(f"Invalid operation attempted: height {height} [REJECTED]")
-            print("Security: Negative height rejected")
-        else:
-            print(f"Height updated: {height}")
+        return f"{self.name} ({self.height}cm, {self.age} days)"
 
 
 if __name__ == "__main__":
-    print("=== Plant Security System ===")
+    print("=== Plant Factory Output ===")
 
-    rose = Plant("Rose", 25, 30),
+    plants = [Plant("Rose", 25, 30),
+              Plant("Oak", 200, 365),
+              Plant("Cactus", 5, 90),
+              Plant("Sunflower", 80, 45),
+              Plant("Fern", 15, 120)]
+
+    count = 0
+    for plant in plants:
+        print(f"Created: {plant.get_info()}")
+        count += 1
+    print(f"\nTotal plants created: {count}")
