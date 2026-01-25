@@ -22,7 +22,7 @@ class Plant:
         else:
             return False
 
-    def grow(self) -> str:
+    def grow(self) -> None:
         self.set_height(1)
         return f"{self.name} grew 1cm"
 
@@ -30,7 +30,7 @@ class Plant:
         return f"{self.name}: {self.height}cm"
 
 
-class Flowering(Plant):
+class FloweringPlant(Plant):
     def __init__(self, name: str, height: int, age: int, color: str) -> None:
         super().__init__(name, height, age)
         self.color = color
@@ -39,14 +39,15 @@ class Flowering(Plant):
         return f"{super().get_info()}, {self.color} flowers (blooming)"
 
 
-class PrizeFlower(Flowering):
+class PrizeFlower(FloweringPlant):
     def __init__(
             self,
             name: str,
             height: int,
             age: int,
             color: str,
-            prize_points: int):
+            prize_points: int
+            ) -> None:
         super().__init__(name, height, age, color)
         self.prize_points = prize_points
 
@@ -54,11 +55,31 @@ class PrizeFlower(Flowering):
         return f"{super().get_info()}, Prize points: {self.prize_points}"
 
 
+class GardenManager:
+    def __init__(self, name: str):
+        self.name = name
+        self.gardens: list[Garden] = []
+
+
+class Garden:
+    def __init__(self, owner: GardenManager) -> None:
+        self.owner = owner
+        self.plants: list[Plant] = []
+
+    def add_plant(self, plant: Plant) -> str:
+        self.plants.append()
+        return f"Added {plant.name} to {self.owner.name}'s garden"
+
+    def grow_all(self, plants: list) -> None:
+        for plant in self.plants:
+            print(f"{plant.grow()}")
+
+
 if __name__ == "__main__":
     print("=== Garden Management System Demo ===\n")
 
     oak = Plant("Oak Tree", 100, 1800)
-    rose = Flowering("Rose", 25, 17, "red")
+    rose = FloweringPlant("Rose", 25, 17, "red")
     sunflower = PrizeFlower("Sunflower", 50, 21, "yellow", 10)
     print(f"{oak.get_info()}")
     print(f"{rose.get_info()}")
