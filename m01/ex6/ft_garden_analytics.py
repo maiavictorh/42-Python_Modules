@@ -3,7 +3,7 @@
 class Plant:
     def __init__(self, name: str, height: int, age: int) -> None:
         self.name = name
-        self.points = 10
+        self.points = 7
         self.set_height(height)
         self.set_age(age)
 
@@ -46,7 +46,7 @@ class FloweringPlant(Plant):
         super().__init__(name, height, age)
         self.color = color
         self.blooming = False
-        self.points = 42
+        self.points = 21
 
     def bloom(self) -> str:
         self.blooming = True
@@ -63,11 +63,9 @@ class PrizeFlower(FloweringPlant):
             height: int,
             age: int,
             color: str,
-            prize_points: int
             ) -> None:
         super().__init__(name, height, age, color)
-        self.prize_points = prize_points
-        self.points = prize_points * 42
+        self.prize_points = 42
 
     def get_info(self) -> str:
         return f"{super().get_info()}, Prize points: {self.prize_points}"
@@ -153,7 +151,7 @@ if __name__ == "__main__":
 
     oak = Plant("Oak Tree", 100, 1800)
     rose = FloweringPlant("Rose", 25, 17, "red")
-    sunflower = PrizeFlower("Sunflower", 50, 21, "yellow", 42)
+    sunflower = PrizeFlower("Sunflower", 50, 21, "yellow")
     pine = Plant("Pine", 7400, 1000)
     carrot = Plant("Carrot", 62, 70)
 
@@ -170,7 +168,7 @@ if __name__ == "__main__":
     bob.add_plant(carrot)
     print()
 
-    total_growth = alice.grow_all(2)
+    total_growth = alice.grow_all(1)
     print()
 
     print(f"=== {alice.name}'s Garden Report ===")
