@@ -42,18 +42,20 @@ class FloweringPlant(Plant):
             height: int,
             age: int,
             color: str,
+            blooming: bool
             ) -> None:
         super().__init__(name, height, age)
         self.color = color
-        self.blooming = False
         self.points = 21
+        self.blooming = blooming
 
     def bloom(self) -> str:
-        self.blooming = True
-        return "(blooming)"
+        if self.blooming:
+            return " (blooming)"
+        return ""
 
     def get_info(self) -> str:
-        return f"{super().get_info()}, {self.color} flowers {self.bloom()}"
+        return f"{super().get_info()}, {self.color} flowers{self.bloom()}"
 
 
 class PrizeFlower(FloweringPlant):
@@ -63,8 +65,9 @@ class PrizeFlower(FloweringPlant):
             height: int,
             age: int,
             color: str,
+            blooming: bool
             ) -> None:
-        super().__init__(name, height, age, color)
+        super().__init__(name, height, age, color, blooming)
         self.prize_points = 42
 
     def get_info(self) -> str:
@@ -150,8 +153,8 @@ if __name__ == "__main__":
     print("=== Garden Management System Demo ===\n")
 
     oak = Plant("Oak Tree", 100, 1800)
-    rose = FloweringPlant("Rose", 25, 17, "red")
-    sunflower = PrizeFlower("Sunflower", 50, 21, "yellow")
+    rose = FloweringPlant("Rose", 25, 17, "red", True)
+    sunflower = PrizeFlower("Sunflower", 50, 21, "yellow", False)
     pine = Plant("Pine", 7400, 1000)
     carrot = Plant("Carrot", 62, 70)
 
@@ -168,7 +171,7 @@ if __name__ == "__main__":
     bob.add_plant(carrot)
     print()
 
-    total_growth = alice.grow_all(1)
+    total_growth = alice.grow_all(5)
     print()
 
     print(f"=== {alice.name}'s Garden Report ===")
