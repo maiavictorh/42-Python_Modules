@@ -158,7 +158,7 @@ if __name__ == "__main__":
     pine = Plant("Pine", 7400, 1000)
     carrot = Plant("Carrot", 62, 70)
 
-    victor: GardenManager = GardenManager.create_garden_network()
+    victor = GardenManager.create_garden_network()
     alice = Garden("Alice")
     bob = Garden("Bob")
     victor.add_garden(alice)
