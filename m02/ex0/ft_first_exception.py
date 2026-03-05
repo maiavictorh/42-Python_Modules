@@ -16,15 +16,12 @@ def check_tempeture(temp_str: str) -> int:
 
 def test_temperature_input():
     print("=== Garden Temperature Checker ===\n")
-    print("Testing temperature: 25")
-    check_tempeture("25")
-    print("\nTesting temperature: abc")
-    check_tempeture("abc")
-    print("\nTesting temperature: 100")
-    check_tempeture("100")
-    print("\nTesting temperature: -50")
-    check_tempeture("-50")
-    print("\nAll tests completed - program didn't crash!")
+    tests = ["25", "abc", "100", "-50"]
+    for test in tests:
+        print(f"Testing temperature: {test}")
+        check_tempeture(test)
+        print()
+    print("All tests completed - program didn't crash!")
 
 
 if __name__ == "__main__":

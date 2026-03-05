@@ -1,53 +1,34 @@
 #!/usr/bin/env python3
 
-def garden_operations(error: int) -> None:
-    if error == 0:
-        print("\nTesting ValueError...")
-        try:
-            temp = int("abc")
-        except ValueError as err:
-            print(f"Caught {type(err).__name__}: {err}")
-    elif error == 1:
-        print("\nTesting ZeroDivisionError...")
-        try:
-            temp = 10 / 0
-            print({temp})
-        except ZeroDivisionError as err:
-            print(f"Caught {type(err).__name__}: {err}")
-    elif error == 2:
-        print("\nTesting FileNotFoundError...")
-        try:
-            open("missing.txt")
-        except FileNotFoundError as err:
-            print(f"Caught {type(err).__name__}: {err}")
-    elif error == 3:
-        print("\nTesting KeyError...")
-        try:
-            rose = {"color": "red"}
-            print(rose["missing_plant"])
-        except KeyError as err:
-            print(f"Caught {type(err).__name__}: {err}")
+def garden_operations(error: str) -> None:
+    if error == "ValueError":
+        temp = int("abc")
+    elif error == "ZeroDivisionError":
+        temp = 42 / 0
+        print({temp})
+    elif error == "FileNotFoundError":
+        open("missing.txt")
+    elif error == "KeyError":
+        rose = {"color": "red"}
+        print(rose["missing_plant"])
+    else:
+        print(f"{error} is not supported yet!")
 
 
 def test_error_types() -> None:
     print("=== Garden Error Types Demo ===")
-
-    i = 0
-    while i < 4:
-        garden_operations(i)
-        i += 1
-
-    print("\nTesting multiple errors together...")
-    try:
-        temp = int("abc")
-        temp /= 0
-        open("anothermissing.txt")
-        sunflower = {"name": "sunflower"}
-        print({sunflower["color"]})
-    except (ValueError, ZeroDivisionError, FileNotFoundError, KeyError):
-        print("Caught an error, but program continues!")
-
-    print("\nAll error types tested succesfully!")
+    errors = ["ValueError", "ZeroDivisionError",
+              "FileNotFoundError", "KeyError"]
+    for error in errors:
+        print(f"Testing {error}...")
+        try:
+            garden_operations(error)
+        except (ValueError, ZeroDivisionError,
+                FileNotFoundError, KeyError) as err:
+            print(f"Caught {type(err).__name__}: {err}")
+        finally:
+            print()
+    print("All error types tested succesfully!")
 
 
 if __name__ == "__main__":
