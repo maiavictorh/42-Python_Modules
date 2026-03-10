@@ -18,7 +18,7 @@ def water_plants(plant_list: list) -> None:
         print("Closing watering system (cleanup)")
 
 
-def test_watering_system():
+def test_watering_system() -> None:
     good_list = ["tomato", "lettuce", "carrots"]
     bad_list = ["tomato", None, "carrots"]
 

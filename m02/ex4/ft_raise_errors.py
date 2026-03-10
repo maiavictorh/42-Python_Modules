@@ -33,7 +33,7 @@ def test_plant_checks() -> None:
         print(f"Error: {err}")
     print("\nTesting bad water level...")
     try:
-        print(f"{check_plant_health('tomato', 15, 10)}")
+        print(f"{check_plant_health('tomato', 15, 7)}")
     except ValueError as err:
         print(f"Error: {err}")
     print("\nTesting bad sunlight hours...")

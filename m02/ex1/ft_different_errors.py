@@ -16,7 +16,7 @@ def garden_operations(error: str) -> None:
 
 
 def test_error_types() -> None:
-    print("=== Garden Error Types Demo ===")
+    print("=== Garden Error Types Demo ===\n")
     errors = ["ValueError", "ZeroDivisionError",
               "FileNotFoundError", "KeyError"]
     for error in errors:
