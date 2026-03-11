@@ -7,7 +7,7 @@ if __name__ == "__main__":
     args_len = len(args)
     if args_len < 2:
         print("No arguments provided!")
-        print(f"Program name {args[0]}")
+        print(f"Program name: {args[0]}")
         print(f"Total arguments: {args_len}")
     else:
         print(f"Program name: {args[0]}")
