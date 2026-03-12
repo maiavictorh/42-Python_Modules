@@ -11,7 +11,6 @@ def dist_calc(pos1: tuple, pos2: tuple) -> int:
 
 if __name__ == "__main__":
     print("=== Game Coordinate System ===\n")
-
     pos0 = (0, 0, 0)
     pos1 = (10, 20, 5)
     print(f"Position created: {pos1}")
