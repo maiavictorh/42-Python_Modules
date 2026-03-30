@@ -1,7 +1,7 @@
 def validate_ingredients(ingredients: str) -> str:
     valid = ["fire", "water", "earth", "air"]
 
-    for i in valid:
-        if valid == ingredients:
-            return f"{ingredients} - VALID"
-    return f"{ingredients} - INVALID"
+    for word in valid:
+        if ingredients.find(word) != -1:
+            return f"{ingredients} - \33[32mVALID\33[0m"
+    return f"{ingredients} - \33[33mINVALID\33[0m"
