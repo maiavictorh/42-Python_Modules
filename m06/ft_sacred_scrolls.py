@@ -1,9 +1,9 @@
-import alchemy
+import alchemy as alchemy
 
 if __name__ == "__main__":
     red = "\33[31m"
     nc = "\33[0m"
-    print("=== Sacred Scroll Mastery ===\n\n"
+    print("\n=== Sacred Scroll Mastery ===\n\n"
           "Testing direct module access:")
 
     print(f"alchemy.elements.create_fire(): {alchemy.elements.create_fire()}")
