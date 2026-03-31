@@ -1,4 +1,4 @@
-import alchemy as alchemy
+import alchemy
 
 if __name__ == "__main__":
     red = "\33[31m"
@@ -15,7 +15,7 @@ if __name__ == "__main__":
     print(f"alchemy.create_fire(): {alchemy.create_fire()}")
     print(f"alchemy.create_water(): {alchemy.create_water()}")
     try:
-        print(f"alchemy.create_fire(): {alchemy.create_earth()}")
+        print(f"alchemy.create_earth(): {alchemy.create_earth()}")
     except AttributeError:
         print(f"alchemy.create_earth(): {red}AttributeError - not exposed{nc}")
     try:
