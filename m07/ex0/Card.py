@@ -18,13 +18,13 @@ class Card(ABC):
     @staticmethod
     def validate_str(input: str) -> str:
         if type(input) is not str or not input.strip():
-            raise ValueError("Invalid name.")
+            raise ValueError("Invalid imput.")
         return input
 
     @staticmethod
     def validate_int(input: int) -> int:
-        if input < 0:
-            raise ValueError("Cost cannot be negative.")
+        if type(input) is not int or input < 0:
+            raise ValueError("Invalid input.")
         return input
 
     @abstractmethod
