@@ -2,6 +2,10 @@ from abc import ABC, abstractmethod
 from enum import Enum
 
 
+class CardError(Exception):
+    pass
+
+
 class Rarity(Enum):
     LEGENDARY = "Legendary"
     EPIC = "Epic"
@@ -10,10 +14,11 @@ class Rarity(Enum):
 
 
 class Card(ABC):
-    def __init__(self, name: str, cost: int, rarity: str) -> None:
-        self._name = self.validate_str(name)
-        self._cost = self.validate_int(cost)
-        self._rarity = self.validate_str(rarity)
+    def __init__(self, name: str, cost: int, rarity: str, mana: int) -> None:
+        self.name = self.validate_str(name)
+        self.cost = self.validate_int(cost)
+        self.rarity = self.validate_str(rarity)
+        self.mana = self.validate_int(mana)
 
     @staticmethod
     def validate_str(input: str) -> str:
@@ -32,7 +37,7 @@ class Card(ABC):
         pass
 
     def get_card_info(self) -> dict:
-        return {"name": self._name, "cost": self._cost, "rarity": self._rarity}
+        return {"name": self.name, "cost": self.cost, "rarity": self.rarity}
 
     def is_playable(self, available_mana: int) -> bool:
-        return available_mana > self._cost
+        return available_mana > self.cost
