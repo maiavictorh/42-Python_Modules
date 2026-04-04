@@ -25,7 +25,7 @@ class ArtifactCard(Card):
             print("Play result: ",
                   {"card_played": self.name,
                    "mana_used": self.cost,
-                   "effect": f"{effect} {self.effect_type} per turn"})
+                   "effect": f"{effect}: {self.effect_type} per turn"})
         else:
             print("\33[33mInsufficient mana!\33[0m")
         return game_state

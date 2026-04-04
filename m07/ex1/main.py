@@ -12,18 +12,20 @@ if __name__ == "__main__":
         artifact = ArtifactCard("Mana Crystal", 2, r.COMMON.value,
                                 6, 99, "+1 mana")
         creature = CreatureCard("Fire Dragon", 5, r.LEGENDARY.value, 7, 5, 6)
-
         deck = Deck()
         deck.add_card(spell)
         deck.add_card(artifact)
         deck.add_card(creature)
+
         print("\nBuilding deck with different card types...")
         print("Deck stats:", deck.get_deck_stats())
 
         print("\nDrawing and playing cards:\n")
-        for card in deck.cards:
+        deck.shuffle()
+        for i in range(0, len(deck.cards)):
             drew_card = deck.draw_card()
-            print(drew_card.play(drew_card.get_card_info()), "\n")
+            drew_card.play(drew_card.get_card_info())
+            print()
 
     except Exception as err:
         print(f"\33[31mERROR: {err}\33[0m")

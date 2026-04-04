@@ -1,4 +1,5 @@
 from ex0.Card import Card, CardError
+import random
 
 
 class Deck():
@@ -19,7 +20,8 @@ class Deck():
         return False
 
     def shuffle(self) -> None:
-        pass
+        if len(self.cards) > 1:
+            random.shuffle(self.cards)
 
     def draw_card(self) -> Card:
         if len(self.cards) > 0:
