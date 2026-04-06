@@ -1,4 +1,4 @@
-from .CreatureCard import CreatureCard
-from .Card import Card
+from .Creature import Creature
 
-__all__ = [Card, CreatureCard]
+
+__all__ = [Creature]
