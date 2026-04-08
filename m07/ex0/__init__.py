@@ -1,4 +1,4 @@
-from .Creature import Creature
+from .CreatureFactory import CreatureFactory, FlameFactory, AquaFactory
 
 
-__all__ = [Creature]
+__all__ = [CreatureFactory, FlameFactory, AquaFactory]
