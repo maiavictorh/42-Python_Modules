@@ -8,7 +8,7 @@ class HealCapability(ABC):
         pass
 
     @abstractmethod
-    def heal(self, target: str) -> str:
+    def heal(self, target: Optional[Creature | list[Creature]]) -> str:
         pass
 
 
@@ -32,8 +32,8 @@ class Sproutling(Creature, HealCapability):
     def attack(self) -> str:
         return f"{self.name} uses Vine Whip!"
 
-    def heal(self, target: Optional[str] = None) -> str:
-        if type(target) is not str or not target.strip():
+    def heal(self, target: Optional[Creature | list[Creature]] = None) -> str:
+        if type(target) is None:
             return f"{self.name} heals itself for a small amount"
         else:
             return f"{self.name} heals itself and others for a small amount"
@@ -46,8 +46,8 @@ class Bloomelle(Creature, HealCapability):
     def attack(self) -> str:
         return f"{self.name} uses Petal Dance!"
 
-    def heal(self, target: Optional[str] = None) -> str:
-        if type(target) is not str or not target.strip():
+    def heal(self, target: Optional[Creature | list[Creature]] = None) -> str:
+        if type(target) is None:
             return f"{self.name} heals itself for a large amount"
         else:
             return f"{self.name} heals itself and others for a large amount"

@@ -1,19 +1,53 @@
-from ex2 import NormalStrategy, AggressiveStrategy, DefensiveStrategy
+from ex0.Creature import Creature
+from ex0 import FlameFactory, AquaFactory
+from ex1 import HealingCreatureFactory, TransformCreatureFactory
+from ex2.BattleStrategy import BattleStrategy, NormalStrategy, \
+                        AggressiveStrategy, DefensiveStrategy, CreatureError
+
+
+def battle(creature1: Creature, creature1_strat: BattleStrategy,
+           creature2: Creature, creature2_strat: BattleStrategy) -> None:
+    print("\n* Battle *")
+    print(creature1.describe())
+    print(" vs.")
+    print(creature2.describe())
+    print(" now fight!")
+    try:
+        creature1_strat.act()
+        creature2_strat.act()
+    except CreatureError as err:
+        print(f"\33[31mBattle error, aborting tournament: {err}\33[0m")
+
 
 if __name__ == "__main__":
 
-    flameling = NormalStrategy("Flameling", "Fire")
-    sproutling = DefensiveStrategy("Sproutling", "Grass")
-    flameling2 = AggressiveStrategy("Flameling", "Fire")
+    flameling = FlameFactory.create_base()
+    sproutling = HealingCreatureFactory.create_base()
+    aquabub = AquaFactory.create_base()
+    shiftling = TransformCreatureFactory.create_base()
 
-    tournament0 = (flameling, sproutling)
+    flameling_normal = NormalStrategy(flameling)
+    sproutling_defensive = DefensiveStrategy(sproutling)
+    flameling_aggressive = AggressiveStrategy(flameling)
+    aquabub_normal = NormalStrategy(aquabub)
+    shiftling_aggressive = AggressiveStrategy(shiftling)
 
-    print("Tournament 0 (basic)")
-    print("[ ", end="")
-    i = 0
-    for creature in tournament0:
-        print(f"({creature.name}+{creature.strat_type})", end="")
-        if i < len(tournament0) - 1:
-            print(", ", end="")
-        i += 1
-    print(" ]")
+    print("Tournament 0 (basic)\n"
+          "[ (Flameling+Normal), (Healing+Defensive) ]\n"
+          "*** Tournament ***\n"
+          "2 opponents involved")
+    battle(flameling, flameling_normal, sproutling, sproutling_defensive)
+
+    print("\nTournament 1 (error)\n"
+          "[ (Flameling+Aggressive), (Healing+Defensive) ]\n"
+          "*** Tournament ***\n"
+          "2 opponents involved")
+    battle(flameling, flameling_aggressive, sproutling, sproutling_defensive)
+
+    print("\nTournament 2 (multiple)\n"
+          "[ (Aquabub+Normal), (Healing+Defensive), (Transform+Aggressive) ]\n"
+          "*** Tournament ***\n"
+          "3 opponents involved")
+    battle(aquabub, aquabub_normal, sproutling, sproutling_defensive)
+    battle(aquabub, aquabub_normal, shiftling, shiftling_aggressive)
+    battle(sproutling, sproutling_defensive, shiftling, shiftling_aggressive)

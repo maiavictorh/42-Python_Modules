@@ -17,7 +17,7 @@ class CreatureFactory(ABC):
         pass
 
 
-class FlameFactory(ABC):
+class FlameFactory(CreatureFactory):
     def __init__(self) -> None:
         pass
 
@@ -30,7 +30,7 @@ class FlameFactory(ABC):
         return Pyrodon("Pyrodon", "Fire/Flying")
 
 
-class AquaFactory(ABC):
+class AquaFactory(CreatureFactory):
     def __init__(self) -> None:
         pass
 

@@ -13,7 +13,7 @@ if __name__ == "__main__":
         bloomelle = HealingCreatureFactory.create_evolved()
         print(bloomelle.describe())
         print(bloomelle.attack())
-        print(bloomelle.heal("AAAAUUU"))
+        print(bloomelle.heal(sproutling))
     except Exception as err:
         print(f"\33[31mERROR: {err}\33[0m")
 

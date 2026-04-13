@@ -1,78 +1,70 @@
 from abc import ABC, abstractmethod
 from ex0.Creature import Creature
-# from ex0 import __creature_factory__ as f1
-# from ex1 import __capability_factory__ as f2
-from ex1.Capability import HealCapability, TransformCapability
+
+
+class CreatureError(Exception):
+    pass
 
 
 class BattleStrategy(ABC):
-    def __init__(self) -> None:
+    def __init__(self, creature: Creature) -> None:
+        self.creature = creature
+
+    @abstractmethod
+    def act(self) -> None:
         pass
 
     @abstractmethod
-    def act() -> str:
-        pass
-
-    @abstractmethod
-    def is_valid() -> bool:
+    def is_valid(self) -> bool:
         pass
 
 
-class NormalStrategy(Creature, BattleStrategy):
-    def __init__(self, name: str, creature_type: str):
-        super().__init__(name, creature_type)
+class NormalStrategy(BattleStrategy):
+    def __init__(self, creature: Creature):
+        super().__init__(creature)
         self.strat_type = "Normal"
 
-    def attack(self) -> str:
-        return super().attack()
+    def act(self) -> None:
+        if not self.is_valid():
+            raise CreatureError(f"Invalid Creature '{self.creature.name}'"
+                                f" for this {self.strat_type} strategy")
+        print(self.creature.attack())
 
-    @staticmethod
-    def act():
-        pass
-
-    @staticmethod
-    def is_valid():
-        pass
+    def is_valid(self) -> bool:
+        return hasattr(self.creature, "attack")
 
 
-class AggressiveStrategy(Creature, TransformCapability, BattleStrategy):
-    def __init__(self, name, creature_type):
-        super().__init__(name, creature_type)
+class AggressiveStrategy(BattleStrategy):
+    def __init__(self, creature: Creature):
+        super().__init__(creature)
         self.strat_type = "Aggressive"
 
-    def attack(self) -> str:
-        return super().attack()
+    def act(self):
+        if not self.is_valid():
+            raise CreatureError(f"Invalid Creature '{self.creature.name}'"
+                                f" for this {self.strat_type} strategy")
+        print(self.creature.transform())
+        print(self.creature.attack())
+        print(self.creature.revert())
 
-    def transform(self):
-        return super().transform()
-
-    def revert(self):
-        return super().revert()
-
-    @staticmethod
-    def act():
-        pass
-
-    @staticmethod
-    def is_valid():
-        pass
+    def is_valid(self) -> bool:
+        return hasattr(self.creature, "transform") and \
+                hasattr(self.creature, "attack") and \
+                hasattr(self.creature, "revert")
 
 
-class DefensiveStrategy(Creature, HealCapability, BattleStrategy):
-    def __init__(self, name: str, creature_type: str):
-        super().__init__(name, creature_type)
+class DefensiveStrategy(BattleStrategy):
+    def __init__(self, creature: Creature):
+        super().__init__(creature)
         self.strat_type = "Normal"
 
-    def attack(self) -> str:
-        return super().attack()
+    def act(self) -> None:
+        if not self.is_valid():
+            raise CreatureError(f"Invalid Creature '{self.creature.name}'"
+                                f" for this {self.strat_type} strategy")
+        print(self.creature.attack())
+        print(self.creature.heal())
 
-    def heal(self, target):
-        return super().heal(target)
-
-    @staticmethod
-    def act():
-        pass
-
-    @staticmethod
-    def is_valid():
-        pass
+    def is_valid(self) -> bool:
+        return hasattr(self.creature, "attack") and \
+                hasattr(self.creature, "heal")
