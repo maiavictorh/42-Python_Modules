@@ -1,9 +1,9 @@
-import sys
+from sys import prefix, base_prefix, executable
+from site import getsitepackages
 
 if __name__ == "__main__":
-
-    path = sys.prefix
-    default_path = sys.base_prefix
+    path = prefix
+    default_path = base_prefix
     print("\nMATRIX STATUS: ", end="")
 
     if path == default_path:
@@ -25,7 +25,7 @@ if __name__ == "__main__":
         print("Welcome to the construct")
 
         split_path = path.split("/")
-        print("\nCurrent Python:", sys.executable)
+        print("\nCurrent Python:", executable)
         print("Virtual Environment:", split_path[-1])
         print("Environment Path:", path)
 
@@ -33,3 +33,5 @@ if __name__ == "__main__":
         print("Safe to install packages without affecting the global system.")
 
         print("\nPackage installation path:")
+        site_packages = getsitepackages()
+        print(site_packages[-1])
