@@ -45,19 +45,14 @@ if __name__ == "__main__":
     else:
         print("\nAnalyzing Matrix data...")
         print("Processing 1000 data points...")
-        time = numpy.linspace(0, 10, 1000)
-        sign = numpy.sin(time) + numpy.random.normal(0, 0.3, 1000)
-        df = pandas.DataFrame({
-            "time": time,
-            "signal": sign})
+        data = numpy.random.normal(42, 10, 1000)
+        df = pandas.DataFrame({"signal_strength": data})
 
-        print("Generating visualization...")
         pyplot.figure()
-        pyplot.plot(df["time"], df["signal"])
-        pyplot.title("Matrix Signal Activity")
-        pyplot.xlabel("Time")
-        pyplot.ylabel("Signal Strenght")
+        pyplot.plot(df["signal_strength"])
+        pyplot.title("Matrix Signal")
         pyplot.savefig("matrix_analysis.png")
 
+        print("Generating visualization...")
         print("\nAnalysis complete!")
         print("Result saved to: matrix_analysis.png")
