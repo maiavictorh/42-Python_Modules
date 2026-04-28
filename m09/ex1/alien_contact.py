@@ -1,13 +1,21 @@
-from pydantic import BaseModel, Field, model_validator  # type: ignore
+from pydantic import BaseModel, Field, model_validator, ValidationError  # type: ignore
 from datetime import datetime
 from typing import Optional
+from enum import Enum
+
+
+class ContactType(Enum):
+    RADIO = "radio"
+    VISUAL = "visual"
+    TELEPATHIC = "telepathic"
+    PHYSICAL = "physical"
 
 
 class AlienContact(BaseModel):
     contact_id: str = Field(min_length=5, max_length=15)
-    timestamp: datetime
+    timestamp: Optional[datetime] = None
     location: str = Field(min_length=3, max_length=100)
-    contact_type: datetime  # Temporary
+    contact_type: ContactType = Field(default=None)
     signal_strength: float = Field(ge=0.0, le=10.0)
     duration_minutes: int = Field(ge=1, le=1440)
     witness_count: int = Field(ge=1, le=100)
@@ -15,5 +23,43 @@ class AlienContact(BaseModel):
     is_verified: bool = Field(default=False)
 
     @model_validator(mode='after')
-    def validator() -> None:
-        pass
+    def validator(self) -> None:
+        if self.contact_id[:2] != "AC":
+            raise ValidationError("Contact ID should start with 'AC'")
+        elif self.contact_type == "physical" and not self.is_verified:
+            raise ValidationError("Physical contact must be verified")
+        elif self.contact_type == "telepathic" and self.witness_count < 3:
+            raise ValidationError("Telepathic contact requires at least 3 witnesses")
+        elif self.signal_strength <= 7.0:
+            raise ValidationError("Signal strength is too weak")
+        
+    def display_info(self) -> str:
+        return (f"ID: {self.contact_id}\n"
+                f"Type: {self.contact_type.value}\n"
+                f"Location: {self.location}\n"
+                f"Signal: {self.signal_strength}\n"
+                f"Duration: {self.duration_minutes}\n"
+                f"Witnesses: {self.witness_count}\n"
+                f"Message: {self.message_received}")
+
+
+if __name__ == "__main__":
+    print("Alien Contact Log Validation")
+    print("========================================")
+
+    data1 = {"contact_id": "AC_2024_001",
+             "contact_type": "radio",
+             "location": "Area 51, Nevada",
+             "signal_strength": "8.5",
+             "duration_minutes": "45",
+             "witness_count": "5",
+             "message_received": "Greetings from Zeta Reticuli"}
+    try:
+        contact1 = AlienContact.model_validate(data1)
+        print("Valid contact report:")
+        print(contact1.display_info())
+    except ValidationError as err:
+        print(f"\33[31m{err.errors()[0]}\33[0m")
+
+    print("\n========================================")
+    print("Expected validation error:")

@@ -27,22 +27,18 @@ if __name__ == "__main__":
     print("Space Station Data Validation")
     print("========================================")
 
-    data1 = {
-        "station_id": "ISS001",
-        "name": "International Space Station",
-        "crew_size": "6",
-        "power_level": "85.5",
-        "oxygen_level": "92.3",
-        "is_operational": "True"
-    }
-    data2 = {
-        "station_id": "ISS001",
-        "name": "International Space Station",
-        "crew_size": "21",
-        "power_level": "85.5",
-        "oxygen_level": "92.3",
-        "is_operational": "True"
-    }
+    data1 = {"station_id": "ISS001",
+             "name": "International Space Station",
+             "crew_size": "6",
+             "power_level": "85.5",
+             "oxygen_level": "92.3",
+             "is_operational": "True"}
+    data2 = {"station_id": "ISS001",
+             "name": "International Space Station",
+             "crew_size": "21",
+             "power_level": "85.5",
+             "oxygen_level": "92.3",
+             "is_operational": "True"}
     try:
         station1 = SpaceStation.model_validate(data1)
         print("Valid station created:")
