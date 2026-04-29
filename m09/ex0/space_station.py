@@ -1,4 +1,4 @@
-from pydantic import BaseModel, Field, ValidationError  # type: ignore
+from pydantic import BaseModel, Field, ValidationError
 from datetime import datetime
 from typing import Optional
 
@@ -39,6 +39,7 @@ if __name__ == "__main__":
              "power_level": "85.5",
              "oxygen_level": "92.3",
              "is_operational": "True"}
+
     try:
         station1 = SpaceStation.model_validate(data1)
         print("Valid station created:")
@@ -49,8 +50,8 @@ if __name__ == "__main__":
     print("\n========================================")
     print("Expected validation error:")
     try:
-        station1 = SpaceStation.model_validate(data2)
+        station2 = SpaceStation.model_validate(data2)
         print("Valid station created:")
-        print(station1.display_info())
+        print(station2.display_info())
     except ValidationError as err:
         print(f"\33[31m{err}\33[0m")

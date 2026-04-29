@@ -1,5 +1,5 @@
 from pydantic import BaseModel, Field, \
-                        model_validator, ValidationError  # type: ignore
+                        model_validator, ValidationError
 from datetime import datetime
 from typing import Optional
 from enum import Enum
@@ -24,14 +24,15 @@ class AlienContact(BaseModel):
     is_verified: bool = Field(default=False)
 
     @model_validator(mode='after')
-    def validator(self) -> "AlienContact":
+    def contact_validator(self) -> "AlienContact":
         if self.contact_id[:2] != "AC":
-            raise ValueError("Contact ID should start with 'AC'")
+            raise ValueError("Contact ID must start with 'AC'")
         elif self.contact_type.value == "physical" and not self.is_verified:
             raise ValueError("Physical contact must be verified")
-        elif self.contact_type.value == "telepathic" and self.witness_count < 3:
-                raise ValueError("Telepathic contact "
-                                      "requires at least 3 witnesses")
+        elif self.contact_type.value == "telepathic" \
+                and self.witness_count < 3:
+            raise ValueError("Telepathic contact "
+                             "requires at least 3 witnesses")
         elif self.signal_strength <= 7.0:
             raise ValueError("Signal strength is too weak")
         return self
@@ -64,6 +65,7 @@ if __name__ == "__main__":
              "duration_minutes": "45",
              "witness_count": "2",
              "message_received": "Greetings from Zeta Reticuli"}
+
     try:
         contact1 = AlienContact.model_validate(data1)
         print("Valid contact report:")
