@@ -45,14 +45,14 @@ if __name__ == '__main__':
     spells = ['heal', 'shield', 'fireball', 'blizzard']
 
     sorted_artifacts = artifact_sorter(artifacts)
-    print(f"\n{GREEN}Testing artifact sorter...{NC}")
+    print(f"\n{GREEN}Testing artifact sorter...", NC)
     i = 1
     for art in sorted_artifacts:
         print(f"{i}. {art['name']} ({art['power']} power) type: {art['type']}")
         i += 1
 
     filtered_mages = power_filter(mages, 82)
-    print(f"\n{GREEN}Testing mage filter (min: 82)...{NC}")
+    print(f"\n{GREEN}Testing mage filter (min: 82)...", NC)
     i = 1
     for mage in filtered_mages:
         print(f"{i}. {mage['name']} ({mage['power']} power)"
@@ -60,13 +60,13 @@ if __name__ == '__main__':
         i += 1
 
     transformed_spells = spell_transformer(spells)
-    print(f"\n{GREEN}Testing spell transformer...{NC}")
+    print(f"\n{GREEN}Testing spell transformer...", NC)
     for spell in transformed_spells:
         print(spell, end=" ")
     print()
 
     stats = mage_stats(mages)
-    print(f"\n{GREEN}Testing Mage statistics...{NC}")
+    print(f"\n{GREEN}Testing Mage statistics...", NC)
     print(f"Max power: {stats['max_power']}\n"
           f"Min power: {stats['min_power']}\n"
           f"Average power: {stats['avg_power']}")
