@@ -31,6 +31,7 @@ def mage_stats(mages: list[dict]) -> dict:
 if __name__ == '__main__':
     GREEN = "\33[32m"
     NC = "\33[0m"
+
     artifacts = [{'name': 'Wind Cloak', 'power': 97, 'type': 'armor'},
                  {'name': 'Shadow Blade', 'power': 78, 'type': 'accessory'},
                  {'name': 'Wind Cloak', 'power': 63, 'type': 'weapon'},

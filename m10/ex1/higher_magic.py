@@ -46,6 +46,7 @@ def shield(target: str, power: int) -> str:
 if __name__ == "__main__":
     GREEN = "\33[32m"
     NC = "\33[0m"
+
     print(f"\n{GREEN}Testing spell combiner...", NC)
     combined = spell_combiner(fireball, heal)
     result = combined("Dragon", 21)
