@@ -1,4 +1,5 @@
 from collections.abc import Callable
+from typing import Any
 
 
 def spell_combiner(spell1: Callable,
@@ -24,8 +25,8 @@ def conditional_caster(condition: Callable,
     return casted
 
 
-def spell_sequence(spells: list[Callable]) -> Callable[[str, int], list[str]]:
-    def sequence(target: str, power: int) -> list[str]:
+def spell_sequence(spells: list[Callable]) -> Callable[[str, int], Any]:
+    def sequence(target: str, power: int) -> Any:
         return (spell(target, power) for spell in spells)
     return sequence
 
