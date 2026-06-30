@@ -8,7 +8,7 @@ if __name__ == "__main__":
         print("Testing factory")
         print(flameling.describe())
         print(flameling.attack())
-        pyrodon = f.FlameFactory.create_evolved(flameling)
+        pyrodon = f.FlameFactory.create_evolved()
         print(pyrodon.describe())
         print(pyrodon.attack())
 
@@ -16,7 +16,7 @@ if __name__ == "__main__":
         aquabub = f.AquaFactory.create_base()
         print(aquabub.describe())
         print(aquabub.attack())
-        torragon = f.AquaFactory.create_evolved(aquabub)
+        torragon = f.AquaFactory.create_evolved()
         print(torragon.describe())
         print(torragon.attack())
 

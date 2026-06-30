@@ -26,7 +26,7 @@ class FlameFactory(CreatureFactory):
         return Flameling("Flameling", "Fire")
 
     @staticmethod
-    def create_evolved(creature: Creature) -> Pyrodon:
+    def create_evolved() -> Pyrodon:
         return Pyrodon("Pyrodon", "Fire/Flying")
 
 
@@ -39,5 +39,5 @@ class AquaFactory(CreatureFactory):
         return Aquabub("Aquabub", "Water")
 
     @staticmethod
-    def create_evolved(creature: Creature) -> Torragon:
+    def create_evolved() -> Torragon:
         return Torragon("Torragon", "Water")
